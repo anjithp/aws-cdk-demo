@@ -3,12 +3,14 @@ import * as apigateway from "@aws-cdk/aws-apigateway";
 import * as lambda from "@aws-cdk/aws-lambda";
 import * as ddb from "@aws-cdk/aws-dynamodb";
 import { AttributeType } from "@aws-cdk/aws-dynamodb";
+import { RemovalPolicy } from "@aws-cdk/core";
 
 export class SampleService extends core.Construct {
   constructor(scope: core.Construct, id: string) {
     super(scope, id);
 
     const ddbTable = new ddb.Table(this, "UserTable", {
+      removalPolicy: RemovalPolicy.DESTROY,
       tableName: "users",
       partitionKey: {
         name: "id",
